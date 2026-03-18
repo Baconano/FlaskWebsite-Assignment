@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CyberGuard Service</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; }
+        .result-box { background: #f4f4f4; padding: 15px; border-left: 5px solid #2ecc71; margin-top: 20px; word-break: break-all; }
+        .btn-group { margin: 10px 0; }
+        button { cursor: pointer; padding: 10px; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Security Services Interface</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        
+        <h3>1. Text & Password Services</h3>
+        {{ form.text_input(placeholder="Enter text here...", style="width:100%") }}
+        <div class="btn-group">
+            <button type="submit" name="action" value="hash">Secure Hash (SHA-256)</button>
+            <button type="submit" name="action" value="key_gen">Generate New Key</button>
+            <button type="submit" name="action" value="encrypt_text">Encrypt Text</button>
+            <button type="submit" name="action" value="decrypt_text">Decrypt Text</button>
+        </div>
+
+        <hr>
+
+        <h3>2. File Services</h3>
+        {{ form.file() }}
+        <div class="btn-group">
+            <button type="submit" name="action" value="upload">Securely Submit File</button>
+        </div>
+    </form>
+
+    {% if result %}
+    <div class="result-box">
+        <strong>Status/Result:</strong> <p>{{ result }}</p>
+        {% if key %}
+        <strong>Your New Key (Save this!):</strong> <code style="color: blue;">{{ key }}</code>
+        {% endif %}
+    </div>
+    {% endif %}
+
+</body>
+</html>
